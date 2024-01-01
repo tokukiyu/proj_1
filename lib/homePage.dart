@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       posts.add(Post(text, widget.name));
     });
-  }
+  } 
  
   @override
   Widget build(BuildContext context) {
