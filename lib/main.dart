@@ -1,13 +1,32 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class Post {
+  String? body;
+  String? author;
+  int likes = 0;
+  bool userLiked = false;
 
-  // This widget is the root of your application.
+  Post(this.body, this.author);
+  int likePost() {
+    userLiked = !userLiked;
+    if (userLiked) {
+      likes += 1;
+    } else {
+      likes -= 1;
+    }
+    return likes;
+  }
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +43,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+  const MyHomePage({Key? key, required this.title});
 
   final String title;
 
@@ -33,18 +52,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-  String text = "";
+  List<Post> posts = [];
 
-  void _incrementCounter() {
+  void newPost(String text) {
     setState(() {
-      _counter++;
-    });
-  }
-
-  void changeText(String text) {
-    setState(() {
-      this.text = text;
+      posts.add(new Post(text, "author"));
     });
   }
 
@@ -55,7 +67,10 @@ class _MyHomePageState extends State<MyHomePage> {
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text("hello flutter one"),
       ),
-      body: Column(children: [InputW(changeText), Text(text)]),
+      body: Column(children: [
+        Expanded(child: PostList(posts: posts)), // Pass posts as a parameter
+        Expanded(child: InputW(newPost)),
+      ]),
     );
   }
 }
@@ -86,14 +101,67 @@ class _InputWState extends State<InputW> {
   @override
   Widget build(BuildContext context) {
     return TextField(
-        controller: this.controller,
-        decoration: InputDecoration(
-          prefixIcon: Icon(Icons.message),
-          suffixIcon: IconButton(
-            icon: Icon(Icons.send),
-            onPressed: click,
+      controller: this.controller,
+      decoration: InputDecoration(
+        prefixIcon: Icon(Icons.message),
+        suffixIcon: IconButton(
+          icon: Icon(Icons.send),
+          onPressed: click,
+        ),
+        labelText: "Type a message:",
+      ),
+    );
+  }
+}
+
+class PostList extends StatefulWidget {
+  final List<Post> posts;
+  const PostList({Key? key, required this.posts});
+
+  @override
+  State<PostList> createState() => _PostListState();
+}
+
+class _PostListState extends State<PostList> {
+  void like(Function callback) {
+    setState(() {
+      callback();
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemCount: widget.posts.length,
+      itemBuilder: (context, index) {
+        var post = widget.posts[index];
+        return Card(
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: ListTile(
+                  title: Text(post.body!),
+                  subtitle: Text(post.author!),
+                ),
+              ),
+              Row(
+                children: <Widget>[
+                  Container(
+                      padding: EdgeInsets.fromLTRB(0, 0, 10, 0),
+                      child: Text(
+                        post.likes.toString(),
+                        style: const TextStyle(fontSize: 20),
+                      )),
+                  IconButton(
+                    onPressed: () => like(() => post.likePost()),
+                    icon: Icon(Icons.thumb_up),
+                  ),
+                ],
+              ),
+            ],
           ),
-          labelText: "Type a message:",
-        ));
+        );
+      },
+    );
   }
 }
