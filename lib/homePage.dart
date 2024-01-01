@@ -32,6 +32,6 @@ class _MyHomePageState extends State<MyHomePage> {
         Expanded(child: PostList(posts: posts)), // Pass posts as a parameter
         InputW(newPost),
       ]),
-    );
+    ); 
   }
 }
