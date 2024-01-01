@@ -1,17 +1,35 @@
 import 'package:flutter/material.dart';
 
-class ColoredSquare extends StatelessWidget {
-  final Color borderColor;
+class CounterApp extends StatefulWidget {
+  @override
+  _CounterAppState createState() => _CounterAppState();
+}
 
-  ColoredSquare({required this.borderColor});
+class _CounterAppState extends State<CounterApp> {
+  int counter = 0;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: 100.0,
-      height: 100.0,
-      decoration: BoxDecoration(
-        border: Border.all(color: borderColor),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Counter App'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text('Counter: $counter', style: TextStyle(fontSize: 20.0)),
+            SizedBox(height: 20.0),
+            ElevatedButton(
+              onPressed: () {
+                setState(() {
+                  counter++;
+                });
+              },
+              child: Text('Increment'),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -20,14 +38,7 @@ class ColoredSquare extends StatelessWidget {
 void main() {
   runApp(
     MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Custom Widget Example'),
-        ),
-        body: Center(
-          child: ColoredSquare(borderColor: Colors.blue),
-        ),
-      ),
+      home: CounterApp(),
     ),
   );
 }
