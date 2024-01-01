@@ -4,9 +4,9 @@ import './postList.dart';
 import './post.dart';
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title});
-
   final String title;
+  final String name;
+  MyHomePage({Key? key, required this.title, required this.name});
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -17,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void newPost(String text) {
     setState(() {
-      posts.add(new Post(text, "author"));
+      posts.add(Post(text, widget.name));
     });
   }
 
