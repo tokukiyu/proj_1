@@ -1,3 +1,4 @@
+import 'package:proj_1/calculator.dart';
 import 'package:proj_1/login.dart';
 
 import './homePage.dart';
@@ -5,7 +6,7 @@ import './homePage.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp( CalculatorApp());
 }
 
 class MyApp extends StatelessWidget {
