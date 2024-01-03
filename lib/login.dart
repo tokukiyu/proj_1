@@ -14,7 +14,7 @@ class LoginPage extends StatelessWidget {
       body: Body(),
     );
   }
-}
+} 
 
 class Body extends StatefulWidget {
   const Body({super.key});
