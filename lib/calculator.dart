@@ -78,7 +78,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
         case '/':
           _output = (_num1 / _num2).toString();
           break;
-      }
+      } 
 
       _num1 = double.parse(_output);
       _operator = '';
