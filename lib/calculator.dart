@@ -61,30 +61,30 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     });
   }
 
-  void _calculateResult() {
-    setState(() {
-      _num2 = double.parse(_output);
+  // void _calculateResult() {
+  //   setState(() {
+  //     _num2 = double.parse(_output);
 
-      switch (_operator) {
-        case '+':
-          _output = (_num1 + _num2).toString();
-          break;
-        case '-':
-          _output = (_num1 - _num2).toString();
-          break;
-        case '*':
-          _output = (_num1 * _num2).toString();
-          break;
-        case '/':
-          _output = (_num1 / _num2).toString();
-          break;
-      } 
+  //     switch (_operator) {
+  //       case '+':
+  //         _output = (_num1 + _num2).toString();
+  //         break;
+  //       case '-':
+  //         _output = (_num1 - _num2).toString();
+  //         break;
+  //       case '*':
+  //         _output = (_num1 * _num2).toString();
+  //         break;
+  //       case '/':
+  //         _output = (_num1 / _num2).toString();
+  //         break;
+  //     } 
  
       _num1 = double.parse(_output);
       _operator = '';
     });
   }
-
+ 
   @override 
   Widget build(BuildContext context) {
     return Scaffold(
