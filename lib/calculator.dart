@@ -60,7 +60,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       _output += digit;
     });
   }
-
+ 
   void _calculateResult() {
     setState(() {
       _num2 = double.parse(_output);
