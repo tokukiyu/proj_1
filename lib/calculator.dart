@@ -64,7 +64,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   void _calculateResult() {
     setState(() {
       _num2 = double.parse(_output);
-  
+   
       switch (_operator) {
         case '+':
           _output = (_num1 + _num2).toString();
