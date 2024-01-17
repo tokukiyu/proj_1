@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
             ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 42, 101, 230)),
         useMaterial3: true,
       ),
-      home: LoginPage(),
+      home: LoginPage(), 
     );
   }
 }
